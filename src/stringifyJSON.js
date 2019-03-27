@@ -10,15 +10,13 @@ var stringifyJSON = function(obj) {
   var vals = [];
   var keys = [];
 
-if (typeof obj === 'number' || typeof obj === 'boolean'){
+if (typeof obj === 'number' || typeof obj === 'boolean' || obj === null){
 	return '' + obj;	
 }
   if(typeof obj === 'string'){
 	return '\"'+ obj +'\"'
   }
-  if(typeof obj === null){
-  	return 'null'
-  } 
+ 
 
   if(Array.isArray(obj)){
   	if(obj[0]=== undefined){
@@ -41,12 +39,11 @@ if (typeof obj === 'number' || typeof obj === 'boolean'){
   				outputArray.push(outputKey + '\"' + eachKey + '\"');
 		} else if (eachKey instanceof Object){
   			outputArray.push(outputKey + stringifyJSON(eachKey)); 
-  		} else if(typeof eachKey === 'number' || typeof eachKey === 'boolean' || typeof eachKey === null){
+  		} else if(typeof eachKey === 'number' || typeof eachKey === 'boolean' || eachKey === null){
   			outputArray.push(outputKey + eachKey)
   		}
   	});
   	 return '{' + outputArray + '}';
   }
- 
 };
 
